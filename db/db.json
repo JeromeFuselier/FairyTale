@@ -1,26 +1,22 @@
 {
     "buttons": [
-      {
-        "txt" : "Humpty Dumpty sat on a wall, \nHumpty Dumpty had a great fall.\nAll the king's horses and all the king's men\nCouldn't put Humpty together again",
-        "img" : "humpty_dumpy.jpg",
-        "x" : 2268,
-        "y" : 695
-      },
-      {
-        "txt" : "Old Mother Hubbard\nWent to the cupboard,\nTo give the poor dog a bone;\nBut when she came there\nThe cupboard was bare,\nAnd so the poor dog had none.",
-        "img" : "old_mother_hubbard.jpg",
-        "x" : 2353,
-        "y" : 663
-      },
-      {
-        "txt" : "Little Jack Horner\nSat in the corner,\nEating his (a) Christmas pie;\nHe put in his thumb,\nAnd pulled out a plum,\nAnd said, 'What a good boy am I!'",
-        "img" : "little_jack_horner.jpg",
-        "x" : 2226,
-        "y" : 634
-      }
+        {
+            "txt": "Humpty Dumpty sat on a wall, \nHumpty Dumpty had a great fall.\nAll the king's horses and all the king's men\nCouldn't put Humpty together again",
+            "img": "humpty_dumpy.jpg",
+            "x": 2268,
+            "y": 695
+        },
+        {
+            "txt": "Old Mother Hubbard\nWent to the cupboard,\nTo give the poor dog a bone;\nBut when she came there\nThe cupboard was bare,\nAnd so the poor dog had none.",
+            "img": "old_mother_hubbard.jpg",
+            "x": 2353,
+            "y": 663
+        },
+        {
+            "txt": "Little Jack Horner\nSat in the corner,\nEating his (a) Christmas pie;\nHe put in his thumb,\nAnd pulled out a plum,\nAnd said, 'What a good boy am I!'",
+            "img": "little_jack_horner.jpg",
+            "x": 2226,
+            "y": 634
+        }
     ]
-    
 }
-
-
-

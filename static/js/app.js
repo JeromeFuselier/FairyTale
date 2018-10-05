@@ -28,7 +28,7 @@ let Application = PIXI.Application,
     
 
 // global variables for interface
-var menu_displayed = false;         // true if a context menu is currently dsplayed
+var menu_displayed = false;         // true if a context menu is currently displayed
 var menu_selected;                  // circle object that has been clicked
 var menu = {};                      // { id: {
                                     //      txt: PIXI.Text,
@@ -71,8 +71,7 @@ function init_db() {
 }
 
 
-function zoom_to(x, y, scale) {    
-    console.log("zoom to :(" + x + ", " + y +  ")");
+function zoom_to(x, y, scale) {   
     // position of the center of the window in the map sprite coords    
    /* let p_center = map.worldTransform.applyInverse(c);*/
     //viewport.snap(x, y);
@@ -83,7 +82,6 @@ function zoom_to(x, y, scale) {
 }
 
 function zoom_out(x, y) {
-    console.log("zoom out :(" + x + ", " + y +  ")");
    //viewport.fitHeight(center=true);
    viewport.fitHeight();
    viewport.moveCenter(x, y);
@@ -159,7 +157,31 @@ function on_click_button(event) {
 
 
 function on_click_map(event) {
-    //alert("Map position (" + Math.floor(event.world.x) + ", " + Math.floor(event.world.y) + ")");
+	//  Admin mode checkbox checked means admin mode is selected
+	if (document.getElementById("admin_checkbox").checked) {// Get the modal
+		let modal = document.getElementById("adminModal");
+
+		// Get the <span> element that closes the modal
+		let span = document.getElementsByClassName("close")[0];
+			
+		// Fill the box with the ccordinates of the click
+		document.getElementById("posX").value = Math.floor(event.world.x);
+		document.getElementById("posY").value = Math.floor(event.world.y);
+		
+		// Display the admin modal
+		modal.style.display = "block";
+		
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		} 
+	} 
 }
 
 
@@ -181,6 +203,7 @@ function on_images_loaded() {
 
     // Create the map sprite
     map = new Sprite(resources["img/map.jpg"].texture);
+    sprite_404 = new Sprite(resources["img/404.png"].texture);
     
     world_width = map.width;
     world_height = map.height;
@@ -249,7 +272,13 @@ function on_images_loaded() {
         );
         msg_bg.endFill();
         
-        let sprite = new Sprite(resources["db_img/" + but.img].texture);
+        let sprite;
+        if (resources["db_img/" + but.img].error) {
+			sprite = sprite_404;
+		} else {
+			sprite = new Sprite(resources["db_img/" + but.img].texture);
+		}
+        
         
         sprite.position.x = but.x + but_size + 3 + padding.x;;
         sprite.position.y = but.y + padding.y / 2;
@@ -276,13 +305,13 @@ function on_images_loaded() {
 
 function load_images() {
     // load images and run the setup function when it's done
-    loader.add("img/map.jpg")
+    loader.add("img/map.jpg");
+    loader.add("img/404.png");
 
     var but;
     var loaded = [];
     for (var i = 0; i < buttons.length; i++) {
         but = buttons[i];
-        console.log(i + " " + but.img);
         if (!loaded.includes(but.img)) {
             loader.add("db_img/" + but.img);
             loaded.push(but.img);

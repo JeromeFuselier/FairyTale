@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var fs = require("fs");
 
@@ -23,24 +24,33 @@ app.use('/css', express.static('static/css'))
 app.use('/img', express.static('static/img'))
 
 
-app.use('/db_img', express.static('db/img'))
+app.use('/db_img', express.static('db/img'));
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.get('/fairy', function (req, res) {
    res.sendFile( __dirname + "/" + "interface.html" );
 })
 
-const data = require('./db/db.json')
+var data = require('./db/db.json');
 
 app.get('/db', function (req, res) {
-  /*res.header("Content-Type",'application/json');
-  res.send(JSON.stringify(data));*/
   res.json(data);
 })
 
-var server = app.listen(8081, function () {
+app.post('/add_entry', function (req, res) {
+  data.buttons.push({
+	  'x': Number(req.body.x),
+	  'y': Number(req.body.y),
+	  'txt': req.body.txt,
+	  'img': req.body.img,
+  });
+  fs.writeFile('./db/db.json',  JSON.stringify(data, null, 4));
+  res.redirect('/fairy');
+})
 
+var server = app.listen(8081, function () {
   var host = server.address().address
   var port = server.address().port
+  console.log(host);
   console.log("Example app listening at http://%s:%s", host, port)
-
 })

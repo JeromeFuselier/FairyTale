@@ -9,7 +9,54 @@
   <script src="/js/pixi.min.js"></script>
   <script src="/js/pixi-viewport.min.js"></script>
   
+  <div class="admin_box">
+    <label class="switch">
+      <input type="checkbox" id="admin_checkbox">
+      <span class="slider round"></span>
+    </label>
+    <span class="admin_text">Admin Mode</span>
+  </div>
+  
   <script src="/js/app.js"></script>
+  
+  <!-- The Modal -->
+  <div id="adminModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+		
+	    <form action="/add_entry" method="post">
+	  <div class="modal-header">
+		<span class="close">&times;</span>
+		<h2>Add a new Entry</h2>
+	  </div>
+      <div class="modal-body">
+		    <div class="form_line">
+				<label for="lposX">X position:</label>
+				<input type="number" id="posX" name="x">
+			  </div>
+			  <div class="form_line">
+				<label for="lposY">Y position:</label>
+				<input type="number" id="posY"  name="y">
+			  </div>
+			  <div class="form_line">
+				<label for="lImg">Image name:</label>
+				<input type="text" id="img_name" name="img">
+			  </div>
+			  <div class="form_line">
+				<label for="ltxt">Text:</label>
+				<textarea name="txt"></textarea>
+			  </div>
+		
+	  </div>
+	  <div class="modal-footer">
+         <div class="button">
+		   <button type="submit">Save Entry</button>
+		 </div>
+	  </div>
+        </form>
+    </div>
+  </div>
+  
   
 </body>
 </html>
